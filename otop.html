@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สินค้าภูมิปัญญาไทย | สมุทรสงคราม</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --primary-color: #1a2a3a; --accent-color: #c5a059; }
+        body { font-family: 'Prompt', sans-serif; background-color: #f8f9fa; }
+
+        /* --- Navbar Style (ยกมาจาก Index) --- */
+        .navbar { transition: all 0.4s ease; padding: 1.5rem 0; background: #1a2a3a; /* Default สีเข้มไปเลยเพื่อให้เห็นชัด */ }
+        .navbar.scrolled {
+            background: rgba(26, 42, 58, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 300; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem; position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; 
+            background-color: var(--accent-color); transition: width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; } /* ขีดเส้นใต้เมื่อ Active */
+        .nav-link.active { color: white !important; }
+
+        /* Product Card */
+        .product-card {
+            border: none; border-radius: 12px; background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s;
+            height: 100%; overflow: hidden; position: relative;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .product-card img { height: 250px; width: 100%; object-fit: cover; transition: 0.5s; }
+        .product-card:hover img { transform: scale(1.05); }
+        
+        .price-tag {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--accent-color); color: white;
+            padding: 5px 15px; border-radius: 50px; font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Modal Design */
+        .modal-content { border-radius: 15px; overflow: hidden; border: none; }
+        .modal-header { background: var(--primary-color); color: white; }
+        .btn-close { filter: invert(1); }
+
+        /* Footer (ยกมาจาก Index) */
+         /* --- Footer (แก้ใหม่: บังคับสีพื้นหลังให้ชัด) --- */
+        footer {
+            background-color: #1a2a3a !important; /* สีน้ำเงินเข้มเกือบดำ */
+            color: #ffffff !important;            /* บังคับตัวหนังสือสีขาว */
+            padding-top: 5rem;
+            padding-bottom: 2rem;
+            position: relative;                   /* กัน layer ซ้อนทับ */
+            z-index: 10;
+        }
+        
+        /* แก้หัวข้อใน Footer ให้เป็นสีทองอ่อนๆ จะได้เด่น */
+        footer h5 {
+            color: #e0c080 !important; 
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* แก้ลิงก์ให้เป็นสีขาวเทาๆ */
+        footer a {
+            color: #cccccc !important;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        footer a:hover {
+            color: #ffffff !important; /* เอาเมาส์ชี้แล้วเป็นสีขาวจั๊วะ */
+        }
+        
+        /* แก้สีไอคอน Social Media */
+        footer i {
+            color: #ffffff;
+        }
+        
+        /* แก้กล่องกรอก Email ให้เห็นขอบชัดขึ้น */
+        footer .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+        footer .form-control::placeholder {
+            color: #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="index.html" style="letter-spacing: 2px;">
+                <i class="fa-solid fa-water me-2"></i> สมุทรสงคราม
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link mx-2" href="index.html">หน้าหลัก</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2 active" href="destinations.html">สถานที่ท่องเที่ยว</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="otop.html">สินค้าชุมชน</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="#contact">ติดต่อ</a></li>
+                </ul>
+                <a href="#" class="btn btn-outline-light ms-3 rounded-pill px-4 btn-sm" style="border-radius: 50px;">วางแผนท่องเที่ยว</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5 pb-3">
+        <div class="text-center py-4">
+            <h1 class="fw-bold text-dark display-5">สินค้าภูมิปัญญาไทย</h1>
+            <p class="text-muted w-75 mx-auto">
+                สนับสนุนสินค้าชุมชนที่คัดสรรมาอย่างดี เพื่อส่งต่อรสชาติและคุณภาพจากแม่กลองถึงมือคุณ
+            </p>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card">
+                    <span class="price-tag">80 ฿</span>
+                    <img src="https://f.ptcdn.info/690/084/000/sfywok36v2a2meakJK1J-o.jpg" alt="Pla Too">
+                    <div class="p-3">
+                        <h5 class="fw-bold">ปลาทูแม่กลอง</h5>
+                        <p class="text-muted small">หน้างอ คอหัก เนื้อหวานมัน นึ่งใหม่สดทุกวันจากเข่ง</p>
+                        <button class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalItem1">
+                            ดูเรื่องราว
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card">
+                    <span class="price-tag">250 ฿/กก.</span>
+                    <img src="https://thaiyoungfarmer.com/wp-content/uploads/2020/07/cover-03.jpg" alt="Lychee">
+                    <div class="p-3">
+                        <h5 class="fw-bold">ลิ้นจี่พันธุ์ค่อม</h5>
+                        <p class="text-muted small">ราชาแห่งผลไม้สมุทรสงคราม หวานอมเปรี้ยว เม็ดเล็ก</p>
+                        <button class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalItem2">
+                            ดูเรื่องราว
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card">
+                    <span class="price-tag">60 ฿</span>
+                   <img src="https://www.grandmomaead.com/product/wp-content/uploads/2025/01/CoconutSugarAmphawa1.webp" alt="Coconut Sugar">
+                    <div class="p-3">
+                        <h5 class="fw-bold">น้ำตาลมะพร้าวแท้</h5>
+                        <p class="text-muted small">เคี่ยวจากเตาตาลแท้ๆ หอมหวาน ไม่ผสมน้ำตาลทราย</p>
+                        <button class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalItem3">
+                            ดูเรื่องราว
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card">
+                    <span class="price-tag">120 ฿</span>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStIA6YTUXKVEDaSsYNwM4iUYwY4eYyN6eq3g&s" alt="Shrimp Paste">
+                    <div class="p-3">
+                        <h5 class="fw-bold">กะปิคลองโคน</h5>
+                        <p class="text-muted small">ทำจากเคยตาดำแท้ สีม่วงสวย กลิ่นหอมฟุ้ง ไม่เค็มจัด</p>
+                        <button class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalItem4">
+                            ดูเรื่องราว
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="product-card">
+                    <span class="price-tag">120 ฿</span>
+                    <img src="https://mpics.mgronline.com/pics/Images/556000009140101.JPEG" alt="Hoi Lot">
+                    <div class="p-3">
+                        <h5 class="fw-bold">หอยหลอด</h5>
+                        <p class="text-muted small">ของดีดอนหอยหลอด เนื้อหนึบ</p>
+                        
+                        <button class="btn btn-outline-dark w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalItem5">
+                            ดูเรื่องราว
+                        </button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <<div class="modal fade" id="modalItem1" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🐟 เรื่องราวของปลาทูแม่กลอง</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://f.ptcdn.info/690/084/000/sfywok36v2a2meakJK1J-o.jpg" class="w-100 rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>ทำไมต้อง "หน้างอ คอหัก"?</h4>
+                            <p class="text-muted">
+                                ปลาทูแม่กลองเติบโตในน้ำกร่อยที่มีสารอาหารอุดมสมบูรณ์ ทำให้เนื้อแน่น มัน และหวานตามธรรมชาติ 
+                                เอกลักษณ์ "หน้างอ คอหัก" เกิดจากการหักคอปลาให้พอดีกับเข่งนึ่ง เป็นภูมิปัญญาชาวบ้านที่มีมายาวนาน
+                            </p>
+                            <h3 class="text-primary mt-4">80 บาท / เข่ง</h3>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="#" class="btn btn-success"><i class="fab fa-line me-2"></i> สั่งซื้อผ่าน LINE</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalItem2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🍒 ลิ้นจี่พันธุ์ค่อม (GI)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://thaiyoungfarmer.com/wp-content/uploads/2020/07/cover-03.jpg" class="w-100 rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>ของดีที่มีปีละครั้ง</h4>
+                            <p class="text-muted">
+                                ลิ้นจี่พันธุ์ค่อมสมุทรสงคราม ได้รับการขึ้นทะเบียนสิ่งบ่งชี้ทางภูมิศาสตร์ (GI) 
+                                ด้วยรสชาติที่เป็นเอกลักษณ์ เนื้อแห้ง ไม่แฉะ หวานอมเปรี้ยว และมีกลิ่นหอมเฉพาะตัว หาซื้อได้ยากมีผลผลิตช่วงสั้นๆ เท่านั้น
+                            </p>
+                            <h3 class="text-primary mt-4">250 บาท / กก.</h3>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="#" class="btn btn-success"><i class="fab fa-line me-2"></i> สั่งซื้อผ่าน LINE</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalItem3" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🥥 น้ำตาลมะพร้าวแท้</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://www.grandmomaead.com/product/wp-content/uploads/2025/01/CoconutSugarAmphawa1.webp" class="w-100 rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>ความหวานจากธรรมชาติ</h4>
+                            <p class="text-muted">
+                                ผลิตจากจั่นมะพร้าวแท้ๆ 100% เคี่ยวด้วยกรรมวิธีโบราณ กลิ่นหอมเป็นเอกลักษณ์ 
+                                ไม่ผสมน้ำตาลทราย เหมาะสำหรับทำขนมไทยหรือปรุงอาหารให้รสชาติกลมกล่อม
+                            </p>
+                            <h3 class="text-primary mt-4">60 บาท / กก.</h3>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="#" class="btn btn-success"><i class="fab fa-line me-2"></i> สั่งซื้อผ่าน LINE</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="modalItem4" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🧂 กะปิคลองโคน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStIA6YTUXKVEDaSsYNwM4iUYwY4eYyN6eq3g&s" class="w-100 rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>ตำนานความอร่อยคู่ครัวไทย</h4>
+                            <p class="text-muted">
+                                ทำจาก "เคยตาดำ" แท้ๆ จากป่าชายเลนคลองโคน หมักด้วยวิธีธรรมชาติ สะอาด ถูกหลักอนามัย 
+                                กลิ่นหอมฟุ้ง ไม่เค็มจัด เนื้อกะปิสีม่วงสวย เหมาะสำหรับตำน้ำพริกหรือใส่แกง
+                            </p>
+                            <h3 class="text-primary mt-4">120 บาท / กระปุก</h3>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="#" class="btn btn-success"><i class="fab fa-line me-2"></i> สั่งซื้อผ่าน LINE</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalItem5" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">🐚 หอยหลอดแห้ง/สด</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="https://mpics.mgronline.com/pics/Images/556000009140101.JPEG" class="w-100 rounded mb-3">
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Signature แห่งดอนหอยหลอด</h4>
+                            <p class="text-muted">
+                                หอยหลอดเป็นหอยที่มีรูปร่างเป็นแท่งยาว อาศัยอยู่ตามดินเลนปากแม่น้ำแม่กลอง 
+                                มีรสชาติหวาน เนื้อหนึบ เป็นเอกลักษณ์ นิยมนำมาตากแห้งทอด หรือผัดฉ่า 
+                                เป็นของฝากที่ใครมาสมุทรสงครามต้องติดไม้ติดมือกลับไป
+                            </p>
+                            <h3 class="text-primary mt-4">120 บาท / แพ็ค</h3>
+                            <div class="d-grid gap-2 mt-3">
+                                <a href="#" class="btn btn-success"><i class="fab fa-line me-2"></i> สั่งซื้อผ่าน LINE</a>
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <footer style="background-color: #1a2a3a; color: white; padding-top: 5rem; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white"><i class="fa-solid fa-water me-2"></i> แม่กลอง</h5>
+                    <p class="small" style="color: #e0e0e0; font-weight: 300; line-height: 1.6;">
+                        แพลตฟอร์มแนะนำการท่องเที่ยวเชิงอนุรักษ์ และสนับสนุนสินค้าชุมชน เพื่อการเติบโตที่ยั่งยืนของจังหวัดสมุทรสงคราม
+                    </p>
+                    <div class="mt-3">
+                        <a href="#" class="me-3 text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white">เมนูหลัก</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="index.html" class="text-white-50 text-decoration-none">หน้าหลัก</a></li>
+                        <li class="mb-2"><a href="destinations.html" class="text-white-50 text-decoration-none">สถานที่ท่องเที่ยว</a></li>
+                        <li class="mb-2"><a href="otop.html" class="text-white-50 text-decoration-none">สินค้าชุมชน</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-12">
+                    <h5 class="text-white">รับข่าวสาร</h5>
+                    <p class="small text-white-50">รับข่าวสารโปรโมชั่นและสถานที่ท่องเที่ยวใหม่ๆ</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email Address" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                        <button class="btn btn-primary" type="button">ติดตาม</button>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="text-center small text-white-50">
+                &copy; 2025 Chakron Yuraket 4DBT(M.6). All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

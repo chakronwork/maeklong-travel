@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สถานที่ท่องเที่ยวทั้งหมด | สมุทรสงคราม</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --primary-color: #1a2a3a; --accent-color: #c5a059; }
+        body { font-family: 'Prompt', sans-serif; background-color: #f8f9fa; }
+        
+        /* Navbar */
+        .navbar { background: #1a2a3a; padding: 1rem 0; }
+        .nav-link { color: rgba(255,255,255,0.8) !important; }
+        .nav-link:hover { color: var(--accent-color) !important; }
+
+        /* Card Hover Effect */
+        .travel-card {
+            border: none; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s; height: 100%; cursor: pointer;
+            text-decoration: none; color: inherit; display: block;
+        }
+        .travel-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+        .travel-card img { height: 250px; object-fit: cover; width: 100%; }
+
+        /* Footer */
+        footer {
+            background-color: #1a2a3a !important;
+            color: #ffffff !important;
+            padding-top: 5rem;
+            padding-bottom: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+        footer h5 { color: #e0c080 !important; margin-bottom: 1.5rem; font-weight: 600; }
+        footer a { color: #cccccc !important; text-decoration: none; transition: color 0.3s; }
+        footer a:hover { color: #ffffff !important; }
+        footer i { color: #ffffff; }
+        footer .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+        }
+        footer .form-control::placeholder { color: #aaaaaa; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="index.html" style="letter-spacing: 2px;">
+                <i class="fa-solid fa-water me-2"></i> สมุทรสงคราม
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link mx-2" href="index.html">หน้าหลัก</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2 active" href="destinations.html">สถานที่ท่องเที่ยว</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="otop.html">สินค้าชุมชน</a></li>
+                    <li class="nav-item"><a class="nav-link mx-2" href="#contact">ติดต่อ</a></li>
+                </ul>
+                <a href="#" class="btn btn-outline-light ms-3 rounded-pill px-4 btn-sm" style="border-radius: 50px;">วางแผนท่องเที่ยว</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5 pb-3">
+        <h1 class="fw-bold text-dark border-start border-5 border-warning ps-3 mt-4">สถานที่ท่องเที่ยวแนะนำ</h1>
+        <p class="text-muted ms-3">คลิกที่สถานที่เพื่ออ่านรีวิวจากนักท่องเที่ยวจริง</p>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6">
+                <a href="https://www.wongnai.com/trips/what-to-do-in-amphawa-floating-market" target="_blank" class="travel-card bg-white">
+                    <img src="https://damnernpawa.com/wp-content/uploads/2019/03/%E0%B8%95%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%99%E0%B9%89%E0%B8%B3%E0%B8%AD%E0%B8%B1%E0%B8%A1%E0%B8%9E%E0%B8%A7%E0%B8%B2_%E0%B9%91%E0%B9%99%E0%B9%90%E0%B9%92%E0%B9%92%E0%B9%98_0001.jpg">
+                    <div class="p-4">
+                        <span class="badge bg-warning text-dark mb-2">ยอดนิยม</span>
+                        <h4 class="fw-bold mb-2">ตลาดน้ำอัมพวา</h4>
+                        <p class="text-muted small">เสน่ห์วิถีริมน้ำยามเย็น อาหารอร่อย และกิจกรรมล่องเรือชมหิ่งห้อย</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://www.wongnai.com/trips/amphawa-train-trip" target="_blank" class="travel-card bg-white">
+                    <img src="https://files.thailandtourismdirectory.go.th/assets/upload/2023/1/12//54175a88-db71-447a-ba9a-3a6eec780747.png">
+                    <div class="p-4">
+                        <span class="badge bg-danger mb-2">Unseen</span>
+                        <h4 class="fw-bold mb-2">ตลาดร่มหุบ</h4>
+                        <p class="text-muted small">ความตื่นเต้นระดับโลก เมื่อตลาดสดตั้งอยู่บนรางรถไฟที่ยังมีรถไฟวิ่งผ่าน</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://www.wongnai.com/attractions/324372bf-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%80%E0%B8%9E%E0%B8%8A%E0%B8%A3%E0%B8%AA%E0%B8%A1%E0%B8%B8%E0%B8%97%E0%B8%A3%E0%B8%A7%E0%B8%A3%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3?_st=cD0zO2I9MzI0MzcyO2FkPWZhbHNlO3Q9MTc2NTk1NTgzMjk3NjtyaT0xWDdiUXZCaFcwbENjZE9ua1RCenl3Z3JUZFBnemY7aT0xWDcwdUV4STdzUUhTQ1Q0S3ZWbzdhcXd3ZmdFb1k7d3JlZj1zcjs%3D" target="_blank" class="travel-card bg-white">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0zBiGLGgNXFs1IHhwhJNNINYQnuHMZO_3Vg&s">
+                    <div class="p-4">
+                        <span class="badge bg-info text-dark mb-2">วัดคู่เมือง</span>
+                        <h4 class="fw-bold mb-2">วัดเพชรสมุทรวรวิหาร</h4>
+                        <p class="text-muted small">กราบไหว้หลวงพ่อบ้านแหลม พระพุทธรูปศักดิ์สิทธิ์ ศูนย์รวมใจชาวแม่กลอง</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://thai.tourismthailand.org/Attraction/%E0%B8%94%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%AD%E0%B8%A2%E0%B8%AB%E0%B8%A5%E0%B8%AD%E0%B8%94" target="_blank" class="travel-card bg-white">
+                    <img src="https://www.gooutthailand.com/wp-content/uploads/2020/03/Don-Hoi-Lot-1.jpg">
+                    <div class="p-4">
+                        <span class="badge bg-success mb-2">ธรรมชาติ</span>
+                        <h4 class="fw-bold mb-2">ดอนหอยหลอด</h4>
+                        <p class="text-muted small">สันดอนปากแม่น้ำ แหล่งหยอดหอยหลอด และร้านอาหารทะเลสดใหม่</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://thai.tourismthailand.org/Attraction/%E0%B8%AD%E0%B8%B2%E0%B8%AA%E0%B8%99%E0%B8%A7%E0%B8%B4%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%9A%E0%B8%B1%E0%B8%87%E0%B9%80%E0%B8%81%E0%B8%B4%E0%B8%94" target="_blank" class="travel-card bg-white">
+                    <img src="https://dmc.tatdataapi.io/assets/4819df21-84aa-4df2-9f48-bf9161547e3c.jpeg">
+                    <div class="p-4">
+                        <span class="badge bg-secondary mb-2">สถาปัตยกรรม</span>
+                        <h4 class="fw-bold mb-2">อาสนวิหารแม่พระบังเกิด</h4>
+                        <p class="text-muted small">โบสถ์คริสต์ศิลปะโกธิคที่สวยงามที่สุดแห่งหนึ่งในไทย อายุเก่าแก่กว่า 100 ปี</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://www.wongnai.com/attractions/324420dj-%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%9A%E0%B8%B2%E0%B8%87%E0%B8%81%E0%B8%B8%E0%B9%89%E0%B8%87?_st=cD00O2I9MzI0NDIwO2FkPWZhbHNlO3Q9MTc2NTk1NTgzMjk3ODtyaT0xWDdiUXZCaFVyOXBaV3NpTzV5ZnR5Tk5qVElNYkg7aT0xWDcwdUV4STdzUUhTQ1Q0S3ZWbzdhcXd3ZmdFb1k7d3JlZj1zcjs%3D" target="_blank" class="travel-card bg-white">
+                    <img src="https://img.wongnai.com/p/800x0/2019/01/16/f34faef8722248be8c745684a70c0536.jpg">
+                    <div class="p-4">
+                        <span class="badge bg-secondary mb-2">ประวัติศาสตร์</span>
+                        <h4 class="fw-bold mb-2">ค่ายบางกุ้ง</h4>
+                        <p class="text-muted small">โบราณสถานและวัดที่มีประวัติศาสตร์ยาวนาน</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <a href="https://www.facebook.com/share/p/1BRmAPWZB2/" target="_blank" class="travel-card bg-white">
+                    <img src="https://images.topnews.co.th/2025/08/97a1826e-b949-421d-8d7f-ccf4bcf5b38d.jpg?x-image-process=style/webp">
+                    <div class="p-4">
+                        <span class="badge bg-secondary mb-2">ชมวิวแม่น้ำและวิถีชีวิต</span>
+                        <h4 class="fw-bold mb-2">สะพานแขวนชมวิวแม่น้ำแม่กลอง</h4>
+                        <p class="text-muted small">สะพานแขวนที่มองเห็นวิวแม่น้ำและชีวิตท้องถิ่นแห่งแม่กลอง</p>
+                        <div class="text-primary fw-bold small">อ่านรีวิว <i class="fas fa-external-link-alt ms-1"></i></div>
+                    </div>
+                </a>
+            </div>
+            
+        </div> </div> <footer style="background-color: #1a2a3a; color: white; padding-top: 5rem; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="fw-bold text-white"><i class="fa-solid fa-water me-2"></i> แม่กลอง</h5>
+                    <p class="small" style="color: #e0e0e0; font-weight: 300; line-height: 1.6;">
+                        แพลตฟอร์มแนะนำการท่องเที่ยวเชิงอนุรักษ์ และสนับสนุนสินค้าชุมชน เพื่อการเติบโตที่ยั่งยืนของจังหวัดสมุทรสงคราม
+                    </p>
+                    <div class="mt-3">
+                        <a href="#" class="me-3 text-white"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="me-3 text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white">เมนูหลัก</h5>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="index.html" class="text-white-50 text-decoration-none">หน้าหลัก</a></li>
+                        <li class="mb-2"><a href="destinations.html" class="text-white-50 text-decoration-none">สถานที่ท่องเที่ยว</a></li>
+                        <li class="mb-2"><a href="otop.html" class="text-white-50 text-decoration-none">สินค้าชุมชน</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-12">
+                    <h5 class="text-white">รับข่าวสาร</h5>
+                    <p class="small text-white-50">รับข่าวสารโปรโมชั่นและสถานที่ท่องเที่ยวใหม่ๆ</p>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Email Address" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white;">
+                        <button class="btn btn-primary" type="button">ติดตาม</button>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            
+            <div class="text-center small text-white-50">
+                &copy; 2025 Chakron Yuraket 4DBT(M.6). All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+</body>
+</html>
